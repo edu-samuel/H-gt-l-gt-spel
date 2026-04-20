@@ -36,4 +36,31 @@ def visa_highscore(highscore_lista):
         sorterad = sorted(highscore_lista, key=lambda x: x["gissningar"])
         for index, spelare in enumerate(sorterad):
             print(f"{index + 1}. {spelare['namn']} - {spelare['gissningar']} gissningar")
+def huvudprogram():
+    highscore_lista = ladda_highscore()
+    
+    while True:
+        print("\n--- HÖGT / LÅGT ---")
+        print("1. Starta spel")
+        print("2. Visa highscore")
+        print("3. Avsluta")
         
+        val = input("\nVälj: ")
+        
+        if val == "1":
+            antal = spela_omgang()
+            namn = input("Skriv ditt namn: ")
+            spelare = {"namn": namn, "gissningar": antal}
+            highscore_lista.append(spelare)
+            spara_highscore(highscore_lista)
+            print(f"Bra jobbat {namn}! Resultatet sparat!")
+        elif val == "2":
+            visa_highscore(highscore_lista)
+        elif val == "3":
+            print("Hejdå!")
+            break
+        else:
+            print("Ogiltigt val, försök igen!")
+
+if __name__ == "__main__":
+    huvudprogram()
